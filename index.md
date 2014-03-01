@@ -9,3 +9,5 @@ This site is designed to hold additional material linked to from [jeremybejarano
 
 ## Various Material
 
+* [MPI for Python Tutorial](mpi4py-tutorial)
+
