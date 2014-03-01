@@ -9,5 +9,5 @@ This site is designed to hold additional material linked to from [jeremybejarano
 
 ## Various Material
 
-* [MPI for Python Tutorial](mpi4py-tutorial)
+* [MPI for Python Tutorial](http://jmbejara.bitbucket.org/MPI-PythonTutorial/source_for_text/_build/html/)
 
