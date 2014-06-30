@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>An Overview of Parallel Computing &mdash; A Python Introduction to Parallel Programming with MPI 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="A Python Introduction to Parallel Programming with MPI 1.0 documentation" href="index.html" />
+    <link rel="next" title="Introduction to MPI" href="introMPI.html" />
+    <link rel="prev" title="Preface" href="preface.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="introMPI.html" title="Introduction to MPI"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="preface.html" title="Preface"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">A Python Introduction to Parallel Programming with MPI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="an-overview-of-parallel-computing">
+<span id="overview"></span><h1>An Overview of Parallel Computing<a class="headerlink" href="#an-overview-of-parallel-computing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="single-processor-limits">
+<h2>Single Processor Limits<a class="headerlink" href="#single-processor-limits" title="Permalink to this headline">¶</a></h2>
+<p>Over the past few dacades we have seen vast increases in computational power available. These increases in computational power have come through increased single processor performance, which have almost wholly been driven by increases in the density of trasnsistors on integrated circuits. The smaller sizes allow the speed of these trasistors to be increased and the overall speed of the integrated circuit can be increased. However, as the speed of these transistors increase, their power consumption increases. Because most of the power consumed is dissapated as heat, the circuit become hotter. If the circuit becomes too hot, it becomes unreliable. In most laptops and desktops, you&#8217;ll notice that the processor is cooled by a fan and heat sink (in larger systems, other cooling systems are often used). The so-called &#8220;heat wall&#8221; refers to the physical limits of single processors to become faster because of the growing inability to sufficiently dissapate heat.</p>
+</div>
+<div class="section" id="flynn-s-taxonomy">
+<h2>Flynn&#8217;s Taxonomy<a class="headerlink" href="#flynn-s-taxonomy" title="Permalink to this headline">¶</a></h2>
+<p>The original classification of parallel computers is popularly known as Flynn&#8217;s taxonomy. In 1966, Michael Flynn classified systems according to the number of instruction streams and the number of data streams. The classical von Neumann machine has a single instruction stream and a single data stream, and hence is identified as a single-instruction single-data (SISD) machine. This basically translates into modern terms as one processor and one set of RAM. At the opposite extreme is the multiple-instruction multiple-data (MIMD) system, in which a collection of autonomous processors operate on their own data streams. In Flynn&#8217;s taxonomy, this is the most general architecture.  Lying between these two extremes, are single-instruction multiple-data (SIMD) and multiple-instruction single-data (MISD) systems.</p>
+<p>The classical von Neumann machine is divided into a CPU and main memory. The CPU is further divided into a control unit and an arithmetic logic unit (ALU). Both data and program memory are stored in a separate memory area, and have to be moved to the CPU in order to do any computation. The wires used to transport the data and program are collectively referred to as the bus. The larger the bus, the more data can be transported simultaneously. Unfortunately, no matter how wide the bus, the CPU can only process one calculation at a time. The von Neumann Bottleneck is the limitation of transfer of data and instructions between memory and the CPU: no matter how fast we make our CPUs, the speed of execution is limited by the rate at which we can transfer information between main memory and the CPU.</p>
+</div>
+<div class="section" id="piplining">
+<h2>Piplining<a class="headerlink" href="#piplining" title="Permalink to this headline">¶</a></h2>
+<p>The first solution to the von Neumann bottleneck was the idea of pipelining. Pipelining is the architecting of a computer and its program into functional units, such that calculations which do not depend on each other can be done concurrently. If the circuits of the CPU are split up, then in theory, the CPU can act like more than one CPU.</p>
+</div>
+<div class="section" id="simd-systems">
+<h2>SIMD Systems<a class="headerlink" href="#simd-systems" title="Permalink to this headline">¶</a></h2>
+<p>A pure SIMD system has only one processor, or CPU, to control, and has many subordinate ALUs. With each instruction cycle, the CPU broadcasts a single instruction to all the subordinate processors, which either executed the instruction or is idle. For example, if we have two vectors of length 1000, we could theoretically add them by distributing their data among the ALUs, and concurrently processing the data. If 1000 is not evenly divisible by the number of ALU&#8217;s, then some are going to have to process more data than the others. Thus, as the few ALUs with extra information to process are working, the other ALU&#8217;s must sit idle, since they are receiving the same instructions from the master CPU.</p>
+</div>
+<div class="section" id="general-mimd">
+<h2>General MIMD<a class="headerlink" href="#general-mimd" title="Permalink to this headline">¶</a></h2>
+<p>The main difference between MIMD and SIMD systems are that the MIMD systems consist of processors which are autonomous, or self-governing. Each process is a fully implemented CPU with its own program memory. Each processor is capable of executing its own program in its own space. It is like having completely separate computers, but which work together. Unlike SIMD systems, MIMD systems are asynchronous, meaning that there is no global clock issuing instructions at regular intervals across all processors anymore. This gives rise to greater flexibility in programming, and greater complexity to manage.</p>
+</div>
+<div class="section" id="message-passing">
+<h2>Message Passing<a class="headerlink" href="#message-passing" title="Permalink to this headline">¶</a></h2>
+<p>The most commonly used method of programming distributed-memory MIMD systems is message passing, or some variant of message passing. In basic message passing, the processes coordinate their activities by explicitly sending and receiving messages, For example, at its most basic, the Message Passing Interface (MPI) provides a function for sending a message, <tt class="docutils literal"><span class="pre">MPI_Send</span></tt>, and a function for receiving a message, <tt class="docutils literal"><span class="pre">MPI_Receive</span></tt>.</p>
+<p>There are several issues to address here. First, note that the commands being executed by process <em>a</em> are going to be different from process <em>b</em>. Thus we could actually write two separate computer programs in different files to accomplish this. However, the most common method today has become to write both processes into one program and to control which lines of execution get assigned to which process. This means that there is only one file of code and that the code is written to assign certain lines to certain processors. This approach to MIMD systems is called single-program multiple-data (SPMD). In SPMD programs, the effect of running different programs is obtained by the use of conditional branches within the source code.</p>
+</div>
+<div class="section" id="mpi-the-message-passing-interface">
+<h2>MPI: the Message Passing Interface<a class="headerlink" href="#mpi-the-message-passing-interface" title="Permalink to this headline">¶</a></h2>
+<p>MPI was developed out of the need for standardization of programming parallel systems. MPI is different than other approaches in that it does not specify a ne language. Rather, MPI specifies a <em>library</em> of functions&#8211;the syntax and sematics of message passing routines&#8211;that can be called from the main scientific programming languages: C, Fortran, C++, and (as we will demonstrate in this tutorial) Python. MPI provides a very powerful and very general way of expressing parallelism. It is however, to use an analogy &#8220;the assemply language of parallel computing,&#8221; because of this generality and the detail that it forces the programmer to deal with. <a class="footnote-reference" href="#f1" id="id1">[1]</a> In spite of this apparent drawback, MPI is important because it is the <em>first</em> portable and universally available standard for programming parallel systems and the <em>de facto</em> standard. That is, MPI makes it possible for programmers to develop portable, parallel software libraries. It is worth reemphasizing, one of the most important contributions of MPI is its support for parallel libraries. <a class="footnote-reference" href="#f2" id="id2">[2]</a> Until recently, one of the biggest problems in parallel computing was the lack of software. However, parallel software is growing faster thanks in large part to this standardization. At the end of this manual we will discuss how this is accomplished (through MPI <em>communicators</em>) and then we will breifly discuss some of the more well-known parallel software libraries.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Provide a concise definition of MPI.</li>
+<li>Most modern personal computers now have multicore processors. In order to take advantage of the extra available computational power, a single program must be specially designed. Programs that are designed for these multicore processors are also &#8220;parallel&#8221; programs, typically written using POSIX ® threads or openMP. MPI, on the other hand, is designed with a different kind of architecture in mind. How does the architecture of a system for which MPI is designed differ what POSIX ® threads or openMP is designed for? What is the difference between MPI and openMP or Pthreads?</li>
+<li>List two different implementations of MPI.</li>
+<li>Determine what implementation of MPI is running on the machine you are using. (Note that mpi4py must be built on top an MPI distrubtion like MPICH or openMPI. What implementation is mpi4py built on top of on you machine?)</li>
+</ol>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Parallel Programming with MPI, by Peter S. Pacheco, p. 7</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>ibid. p. 340</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">An Overview of Parallel Computing</a><ul>
+<li><a class="reference internal" href="#single-processor-limits">Single Processor Limits</a></li>
+<li><a class="reference internal" href="#flynn-s-taxonomy">Flynn&#8217;s Taxonomy</a></li>
+<li><a class="reference internal" href="#piplining">Piplining</a></li>
+<li><a class="reference internal" href="#simd-systems">SIMD Systems</a></li>
+<li><a class="reference internal" href="#general-mimd">General MIMD</a></li>
+<li><a class="reference internal" href="#message-passing">Message Passing</a></li>
+<li><a class="reference internal" href="#mpi-the-message-passing-interface">MPI: the Message Passing Interface</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="preface.html"
+                        title="previous chapter">Preface</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="introMPI.html"
+                        title="next chapter">Introduction to MPI</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/overview.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="introMPI.html" title="Introduction to MPI"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="preface.html" title="Preface"
+             >previous</a> |</li>
+        <li><a href="index.html">A Python Introduction to Parallel Programming with MPI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jeremy Bejarano.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

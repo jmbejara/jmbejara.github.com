@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Appendix &mdash; A Python Introduction to Parallel Programming with MPI 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="A Python Introduction to Parallel Programming with MPI 1.0 documentation" href="index.html" />
+    <link rel="prev" title="I/O, Debugging, and Performance" href="IOandDebugging.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="IOandDebugging.html" title="I/O, Debugging, and Performance"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">A Python Introduction to Parallel Programming with MPI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="appendix">
+<span id="id1"></span><h1>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h1>
+<p>Here is an abbreviated reference of the features of mpi4py. For a full documentation of the API, see <a class="reference external" href="http://mpi4py.scipy.org/docs/apiref/">http://mpi4py.scipy.org/docs/apiref/</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">One of the main differences between this presentation of mpi4py and MPI in C or Fortan, besides being array-based, is that mpi4py is largely object oriented. The MPI Communicator in mpi4py is a Python class and MPI functions like <em>Send</em> or <em>Broadcast</em> are instance methods of the communicator class. The object-oriented nature of mpi4py is seen mostly in dealing with MPI topologies. I will not discuss these in detail, but rather focus on an introduction to the basics of distributed memory programming with MPI. Throughout the tutorial you will see functions like <tt class="docutils literal"><span class="pre">Send(...)</span></tt> presented as <tt class="docutils literal"><span class="pre">Comm.Send(...)</span></tt> where it is implied that <tt class="docutils literal"><span class="pre">Comm</span></tt> is an instance of the <em>Comm</em> class. I will document <tt class="docutils literal"><span class="pre">Comm</span></tt> as in input paramter to the function.</p>
+</div>
+<div class="section" id="instance-methods-of-comm-class">
+<span id="commmethods"></span><h2>Instance Methods of <em>Comm</em> Class<a class="headerlink" href="#instance-methods-of-comm-class" title="Permalink to this headline">¶</a></h2>
+<p>For full documentation of the <em>Comm</em> class, see <a class="reference external" href="http://mpi4py.scipy.org/docs/apiref/mpi4py.MPI.Comm-class.html">http://mpi4py.scipy.org/docs/apiref/mpi4py.MPI.Comm-class.html</a>.</p>
+<div class="section" id="uppercase-communication">
+<h3>&#8220;Uppercase&#8221; Communication<a class="headerlink" href="#uppercase-communication" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-abort-errorcode-0">Abort( errorcode=0)</dt>
+<dd>Terminate MPI execution environment</dd>
+<dt id="term-allgather-sendbuf-recvbuf">Allgather(sendbuf, recvbuf)</dt>
+<dd>Gather to All, gather data from all processes and distribute it to all other processes in a group</dd>
+<dt id="term-allgatherv-sendbuf-recvbuf">Allgatherv(sendbuf, recvbuf)</dt>
+<dd>Gather to All Vector, gather data from all processes and distribute it to all other processes in a group providing different amount of data and displacements</dd>
+<dt id="term-allreduce-sendbuf-recvbuf-op-op-sum">Allreduce(sendbuf, recvbuf, Op op=SUM)</dt>
+<dd>All Reduce</dd>
+<dt id="term-alltoall-sendbuf-recvbuf">Alltoall(sendbuf, recvbuf)</dt>
+<dd>All to All Scatter/Gather, send data from all to all processes in a group</dd>
+<dt id="term-alltoallv-sendbuf-recvbuf">Alltoallv(sendbuf, recvbuf)</dt>
+<dd>All to All Scatter/Gather Vector, send data from all to all processes in a group providing different amount of data and displacements</dd>
+<dt id="term-alltoallw-sendbuf-recvbuf">Alltoallw(sendbuf, recvbuf)</dt>
+<dd>Generalized All-to-All communication allowing different counts, displacements and datatypes for each partner</dd>
+<dt id="term-barrier">Barrier()</dt>
+<dd>Barrier synchronization</dd>
+<dt id="term-bcast-buf-root-0">Bcast(buf, root=0)</dt>
+<dd>Broadcast a message from one process to all other processes in a group</dd>
+<dt id="term-bsend-buf-dest-0-tag-0">Bsend(buf, dest=0, tag=0)</dt>
+<dd>Blocking send in buffered mode</dd>
+<dt id="term-bsend-init-buf-dest-0-tag-0">Bsend_init(buf, dest=0, tag=0)</dt>
+<dd>Persistent request for a send in buffered mode</dd>
+<dt id="term-call-errhandler-errorcode">Call_errhandler(errorcode)</dt>
+<dd>Call the error handler installed on a communicator</dd>
+<dt id="term-clone">Clone()</dt>
+<dd>Clone an existing communicator</dd>
+<dt id="term-compare-type-cls-comm-comm1-comm-comm2">Compare(type cls, Comm comm1, Comm comm2)</dt>
+<dd>Compare two communicators</dd>
+<dt id="term-disconnect">Disconnect()</dt>
+<dd>Disconnect from a communicator</dd>
+<dt id="term-free">Free()</dt>
+<dd>Free a communicator</dd>
+<dt id="term-gather-sendbuf-recvbuf-root-0">Gather(sendbuf, recvbuf, root=0)</dt>
+<dd>Gather together values from a group of processes</dd>
+<dt id="term-gatherv-sendbuf-recvbuf-root-0">Gatherv(sendbuf, recvbuf, root=0)</dt>
+<dd>Gather Vector, gather data to one process from all other processes in a group providing different amount of data and displacements at the receiving sides</dd>
+<dt id="term-get-attr-keyval">Get_attr(keyval)</dt>
+<dd>Retrieve attribute value by key</dd>
+<dt id="term-get-errhandler">Get_errhandler()</dt>
+<dd>Get the error handler for a communicator</dd>
+<dt id="term-get-group">Get_group()</dt>
+<dd>Access the group associated with a communicator</dd>
+<dt id="term-get-name">Get_name()</dt>
+<dd>Get the print name for this communicator</dd>
+<dt id="term-get-parent-type-cls">Get_parent(type cls)</dt>
+<dd>Return the parent intercommunicator for this process</dd>
+<dt id="term-get-rank">Get_rank()</dt>
+<dd>Return the rank of this process in a communicator</dd>
+<dt id="term-get-size">Get_size()</dt>
+<dd>Return the number of processes in a communicator</dd>
+<dt id="term-get-topology">Get_topology()</dt>
+<dd>Determine the type of topology (if any) associated with a communicator</dd>
+<dt id="term-ibsend-buf-dest-0-tag-0">Ibsend(buf, dest=0, tag=0)</dt>
+<dd>Nonblocking send in buffered mode</dd>
+<dt id="term-iprobe-source-0-tag-0-status-status-none">Iprobe(source=0, tag=0, Status status=None)</dt>
+<dd>Nonblocking test for a message</dd>
+<dt id="term-irecv-buf-source-0-tag-0">Irecv(buf, source=0, tag=0)</dt>
+<dd>Nonblocking receive</dd>
+<dt id="term-irsend-buf-dest-0-tag-0">Irsend(buf, dest=0, tag=0)</dt>
+<dd>Nonblocking send in ready mode</dd>
+<dt id="term-is-inter">Is_inter()</dt>
+<dd>Test to see if a comm is an intercommunicator</dd>
+<dt id="term-is-intra">Is_intra()</dt>
+<dd>Test to see if a comm is an intracommunicator</dd>
+<dt id="term-isend-buf-dest-0-tag-0">Isend(buf, dest=0, tag=0)</dt>
+<dd>Nonblocking send</dd>
+<dt id="term-issend-buf-dest-0-tag-0">Issend(buf, dest=0, tag=0)</dt>
+<dd>Nonblocking send in synchronous mode</dd>
+<dt id="term-join-type-cls-fd">Join(type cls, fd)</dt>
+<dd>Create a intercommunicator by joining two processes connected by a socket</dd>
+<dt id="term-probe-source-0-tag-0-status-status-none">Probe(source=0, tag=0, Status status=None)</dt>
+<dd>Blocking test for a message</dd>
+<dt id="term-recv-buf-source-0-tag-0-status-status-none">Recv(buf, source=0, tag=0, Status status=None)</dt>
+<dd>Blocking receive</dd>
+<dt id="term-recv-init-buf-source-0-tag-0">Recv_init(buf, source=0, tag=0)</dt>
+<dd>Create a persistent request for a receive</dd>
+<dt id="term-reduce-sendbuf-recvbuf-op-op-sum-root-0">Reduce(sendbuf, recvbuf, Op op=SUM, root=0)</dt>
+<dd>Reduce</dd>
+<dt id="term-reduce-scatter-sendbuf-recvbuf-recvcounts-none-op-op-sum">Reduce_scatter(sendbuf, recvbuf, recvcounts=None, Op op=SUM)</dt>
+<dd>Reduce-Scatter (vector version)</dd>
+<dt id="term-reduce-scatter-block-sendbuf-recvbuf-op-op-sum">Reduce_scatter_block(sendbuf, recvbuf, Op op=SUM)</dt>
+<dd>Reduce-Scatter Block (regular, non-vector version)</dd>
+<dt id="term-rsend-buf-dest-0-tag-0">Rsend(buf, dest=0, tag=0)</dt>
+<dd>Blocking send in ready mode</dd>
+<dt id="term-rsend-init-buf-dest-0-tag-0">Rsend_init(buf, dest=0, tag=0)</dt>
+<dd>Persistent request for a send in ready mode</dd>
+<dt id="term-scatter-sendbuf-recvbuf-root-0">Scatter(sendbuf, recvbuf, root=0)</dt>
+<dd>Scatter Vector, scatter data from one process to all other processes in a group</dd>
+<dt id="term-scatterv-choice-sendbuf-tuple-int-sendcounts-tuple-int-displacements-mpi-datatype-sendtype-choice-recvbuf-root-0">Scatterv([choice sendbuf, tuple_int sendcounts, tuple_int displacements, MPI_Datatype sendtype], choice recvbuf, root=0)</dt>
+<dd>Scatter data from one process to all other processes in a group providing different amount of data and displacements at the sending side</dd>
+<dt id="term-send-buf-dest-0-tag-0">Send(buf, dest=0, tag=0)</dt>
+<dd>Blocking send</dd>
+<dt id="term-send-init-buf-dest-0-tag-0">Send_init(buf, dest=0, tag=0)</dt>
+<dd>Create a persistent request for a standard send</dd>
+<dt id="term-sendrecv-sendbuf-dest-0-sendtag-0-recvbuf-none-source-0-recvtag-0-status-status-none">Sendrecv(sendbuf, dest=0, sendtag=0, recvbuf=None, source=0, recvtag=0, Status status=None)</dt>
+<dd>Send and receive a message</dd>
+<dt id="term-sendrecv-replace-buf-dest-0-sendtag-0-source-0-recvtag-0-status-status-none">Sendrecv_replace(buf, dest=0, sendtag=0, source=0, recvtag=0, Status status=None)</dt>
+<dd>Send and receive a message</dd>
+<dt id="term-set-errhandler-errhandler-errhandler">Set_errhandler(Errhandler errhandler)</dt>
+<dd>Set the error handler for a communicator</dd>
+<dt id="term-set-name-name">Set_name(name)</dt>
+<dd>Set the print name for this communicator</dd>
+<dt id="term-ssend-buf-dest-0-tag-0">Ssend(buf, dest=0, tag=0)</dt>
+<dd>Blocking send in synchronous mode</dd>
+<dt id="term-ssend-init-buf-dest-0-tag-0">Ssend_init(buf, dest=0, tag=0)</dt>
+<dd>Persistent request for a send in synchronous mode</dd>
+</dl>
+</div>
+<div class="section" id="lowercase-communication">
+<h3>&#8220;Lowercase&#8221; Communication<a class="headerlink" href="#lowercase-communication" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-allgather-sendobj-none-recvobj-none">allgather(sendobj=None, recvobj=None)</dt>
+<dd>Gather to All</dd>
+<dt id="term-allreduce-sendobj-none-recvobj-none-op-sum">allreduce(sendobj=None, recvobj=None, op=SUM)</dt>
+<dd>Reduce to All</dd>
+<dt id="term-alltoall-sendobj-none-recvobj-none">alltoall(sendobj=None, recvobj=None)</dt>
+<dd>All to All Scatter/Gather</dd>
+<dt id="term-56">barrier()</dt>
+<dd>Barrier</dd>
+<dt id="term-bcast-obj-none-root-0">bcast(obj=None, root=0)</dt>
+<dd>Broadcast</dd>
+<dt id="term-bsend-obj-none-dest-0-tag-0">bsend(obj=None, dest=0, tag=0)</dt>
+<dd>Send in buffered mode</dd>
+<dt id="term-gather-sendobj-none-recvobj-none-root-0">gather(sendobj=None, recvobj=None, root=0)</dt>
+<dd>Gather</dd>
+<dt id="term-ibsend-obj-none-dest-0-tag-0">ibsend(obj=None, dest=0, tag=0)</dt>
+<dd>Nonblocking send in buffered mode</dd>
+<dt id="term-isend-obj-none-dest-0-tag-0">isend(obj=None, dest=0, tag=0)</dt>
+<dd>Nonblocking send</dd>
+<dt id="term-issend-obj-none-dest-0-tag-0">issend(obj=None, dest=0, tag=0)</dt>
+<dd>Nonblocking send in synchronous mode</dd>
+<dt id="term-recv-obj-none-source-0-tag-0-status-status-none">recv(obj=None, source=0, tag=0, Status status=None)</dt>
+<dd>Receive</dd>
+<dt id="term-reduce-sendobj-none-recvobj-none-op-sum-root-0">reduce(sendobj=None, recvobj=None, op=SUM, root=0)</dt>
+<dd>Reduce</dd>
+<dt id="term-scatter-sendobj-none-recvobj-none-root-0">scatter(sendobj=None, recvobj=None, root=0)</dt>
+<dd>Scatter</dd>
+<dt id="term-send-obj-none-dest-0-tag-0">send(obj=None, dest=0, tag=0)</dt>
+<dd>Send</dd>
+<dt id="term-sendrecv-sendobj-none-dest-0-sendtag-0-recvobj-none-source-0-recvtag-0-status-status-none">sendrecv(sendobj=None, dest=0, sendtag=0, recvobj=None, source=0, recvtag=0, Status status=None)</dt>
+<dd>Send and Receive</dd>
+<dt id="term-ssend-obj-none-dest-0-tag-0">ssend(obj=None, dest=0, tag=0)</dt>
+<dd>Send in synchronous mode</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="the-op-class-reduction-operations">
+<span id="opclass"></span><h2>The <em>Op</em> Class (Reduction Operations)<a class="headerlink" href="#the-op-class-reduction-operations" title="Permalink to this headline">¶</a></h2>
+<p>Within the <em>Op</em> class are values that represent predefine operations to be used with the &#8220;reduce&#8221; functions. There are also methods that allow the creation of user-defined operations. I present here a table of the predefined operations. Full documentation is found here: <a class="reference external" href="http://mpi4py.scipy.org/docs/apiref/mpi4py.MPI.Op-class.html">http://mpi4py.scipy.org/docs/apiref/mpi4py.MPI.Op-class.html</a></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>MPI.MAX</td>
+<td>maximum</td>
+</tr>
+<tr class="row-odd"><td>MPI.MIN</td>
+<td>minimum</td>
+</tr>
+<tr class="row-even"><td>MPI.SUM</td>
+<td>sum</td>
+</tr>
+<tr class="row-odd"><td>MPI.PROD</td>
+<td>product</td>
+</tr>
+<tr class="row-even"><td>MPI.LAND</td>
+<td>logical and</td>
+</tr>
+<tr class="row-odd"><td>MPI.BAND</td>
+<td>bit-wise and</td>
+</tr>
+<tr class="row-even"><td>MPI.LOR</td>
+<td>logical or</td>
+</tr>
+<tr class="row-odd"><td>MPI.BOR</td>
+<td>bit-wise or</td>
+</tr>
+<tr class="row-even"><td>MPI.LXOR</td>
+<td>logical xor</td>
+</tr>
+<tr class="row-odd"><td>MPI.BXOR</td>
+<td>bit-wise xor</td>
+</tr>
+<tr class="row-even"><td>MPI.MAXLOC</td>
+<td>max value and location</td>
+</tr>
+<tr class="row-odd"><td>MPI.MINLOC</td>
+<td>min value and location</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Appendix</a><ul>
+<li><a class="reference internal" href="#instance-methods-of-comm-class">Instance Methods of <em>Comm</em> Class</a><ul>
+<li><a class="reference internal" href="#uppercase-communication">&#8220;Uppercase&#8221; Communication</a></li>
+<li><a class="reference internal" href="#lowercase-communication">&#8220;Lowercase&#8221; Communication</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-op-class-reduction-operations">The <em>Op</em> Class (Reduction Operations)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="IOandDebugging.html"
+                        title="previous chapter">I/O, Debugging, and Performance</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/appendix.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="IOandDebugging.html" title="I/O, Debugging, and Performance"
+             >previous</a> |</li>
+        <li><a href="index.html">A Python Introduction to Parallel Programming with MPI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jeremy Bejarano.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
