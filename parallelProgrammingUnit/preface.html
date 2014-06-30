@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Preface &mdash; A Python Introduction to Parallel Programming with MPI 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="A Python Introduction to Parallel Programming with MPI 1.0 documentation" href="index.html" />
+    <link rel="next" title="An Overview of Parallel Computing" href="overview.html" />
+    <link rel="prev" title="A Python Introduction to Parallel Programming with MPI" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="overview.html" title="An Overview of Parallel Computing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="A Python Introduction to Parallel Programming with MPI"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">A Python Introduction to Parallel Programming with MPI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="preface">
+<span id="id1"></span><h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h1>
+<p>NOTE: An update version of this site and tutorial exists at <a class="reference external" href="http://jmbejara.bitbucket.org/MPI-PythonTutorial/source_for_text/_build/html/preface.html">http://jmbejara.bitbucket.org/MPI-PythonTutorial/source_for_text/_build/html/preface.html</a></p>
+<font size="3" color="red">You will be redirected in 5 seconds.</font>
+<meta HTTP-EQUIV="REFRESH" content="5; url=http://jmbejara.bitbucket.org/MPI-PythonTutorial/source_for_text/_build/html/">
+<p>This tutorial was written for use in teaching courses in an undergradtuate research training program in applied and computational mathematics at BYU (for both the IMPACT group in the Department of Mathematics <a class="footnote-reference" href="#f1" id="id2">[1]</a> and for the Macro Group in the Department of Economics <a class="footnote-reference" href="#f2" id="id3">[2]</a>).</p>
+<div class="section" id="why-mpi-for-python-mpi4py">
+<h2>Why <em>MPI for Python</em> (mpi4py)?<a class="headerlink" href="#why-mpi-for-python-mpi4py" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of this tutorial is to teach parallel programming on ditributed memory machines using MPI (Message Pasing Interface). I have written the entire tutorial in Python using the MPI implementation mpi4py.</p>
+<p>Though the most appropriate languages for parallel computing are C or Fortran, many researchers favor array-based languages (such as Python or Matlab) over C and Fortran for their ease of use. In particular, Python has become increasingly popular. Unfortunately, Python is not well suited for High Performance Computing and its the parallel capabilities are still somewhat underdeveloped. However, for the same reason that Python is an excellent language for algorithm design and for solving problems that don&#8217;t require maximum performance, Python is an excellent tool in developing parallel code. In general, parallel programming is much more difficult and complex than in serial. This makes parallel programming in Python great for prototyping and for small to medium codes. It can even be considered appropriate for production if the communication is not very frequent and performance is not the primary concern <a class="footnote-reference" href="#f3" id="id4">[3]</a>.</p>
+<p>Most importantly, I use Python coupled with mpi4py for pedagogical purposes. mpi4py seems to retain the most functionality of C implementations of MPI of the several parallel Python packages. This allows me to present MPI in a way that can be easily translated into C or Fortran. Throughout this tutorial I restrict myself to using mpi4py in a way that best resembles MPI in C or Fortran.</p>
+<p>Note that one of the main differences between this presentation of mpi4py and MPI in C or Fortan, besides being array-based, is that mpi4py is largely object oriented. The MPI Communicator in mpi4py is a Python class and MPI functions like <em>Send</em> or <em>Broadcast</em> are instance methods of the communicator class. The object-oriented nature of mpi4py is seen mostly in dealing with MPI topologies. I will not discuss these in detail, but rather focus on an introduction to the basics of distributed memory programming with MPI. Throughout the tutorial you will see functions like <tt class="docutils literal"><span class="pre">Send(...)</span></tt> are presented as <tt class="docutils literal"><span class="pre">Comm.Send(...)</span></tt> where it is implied that <tt class="docutils literal"><span class="pre">Comm</span></tt> is an instance of the <em>Comm</em> class. I will document <tt class="docutils literal"><span class="pre">Comm</span></tt> as in input parameter to the function.</p>
+<p>Also, note that mpi4py supports two methods of communication to implement each of the basic MPI commands. They are the upper and lower case commands (e.g. <tt class="docutils literal"><span class="pre">Bcast(...)</span></tt> and <tt class="docutils literal"><span class="pre">bcast(...)</span></tt>). The uppercase implementations use traditional MPI datatypes while the lower case use Python&#8217;s pickling method. Pickling offers extra convenience to using mpi4py, but the traditional method is faster. In this tutorial, we use only the uppercase functions, though we include a section about using the other.</p>
+</div>
+<div class="section" id="why-this-tutorial">
+<h2>Why this tutorial?<a class="headerlink" href="#why-this-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>Although other tutorials exist that teach mpi4py, none are complete and none of them teach MPI from scratch. This tutorial dills that gap and is designed to teach MPI from a beginner&#8217;s point of view, enabling the student the convenience of learning it with Python.</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>BYU IMPACT Group <a class="reference external" href="http://impact.byu.edu">http://impact.byu.edu</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>BYU Macro Group, Computational Economics Boot Camp <a class="reference external" href="http://economics.byu.edu/Pages/MacroLab/MacroLab-Boot-Camp.aspx">http://economics.byu.edu/Pages/MacroLab/MacroLab-Boot-Camp.aspx</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td><a class="reference external" href="http://www.tacc.utexas.edu/c/document_library/get_file?uuid=be16db01-57d9-4422-b5d5-17625445f351&amp;groupId=13601">http://www.tacc.utexas.edu/c/document_library/get_file?uuid=be16db01-57d9-4422-b5d5-17625445f351&amp;groupId=13601</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Preface</a><ul>
+<li><a class="reference internal" href="#why-mpi-for-python-mpi4py">Why <em>MPI for Python</em> (mpi4py)?</a></li>
+<li><a class="reference internal" href="#why-this-tutorial">Why this tutorial?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">A Python Introduction to Parallel Programming with MPI</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="next chapter">An Overview of Parallel Computing</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/preface.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="overview.html" title="An Overview of Parallel Computing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="A Python Introduction to Parallel Programming with MPI"
+             >previous</a> |</li>
+        <li><a href="index.html">A Python Introduction to Parallel Programming with MPI 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jeremy Bejarano.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
