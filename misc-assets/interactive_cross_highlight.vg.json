@@ -1,0 +1,132 @@
+{
+  "config": {
+    "view": {
+      "width": 400,
+      "height": 300
+    }
+  },
+  "vconcat": [
+    {
+      "layer": [
+        {
+          "data": {
+            "url": "https://vega.github.io/vega-datasets/data/movies.json",
+            "format": {
+              "type": "json"
+            }
+          },
+          "mark": "rect",
+          "encoding": {
+            "color": {
+              "type": "quantitative",
+              "aggregate": "count",
+              "field": "*",
+              "legend": {
+                "title": "Total Records"
+              },
+              "scale": {
+                "scheme": "greenblue"
+              }
+            },
+            "x": {
+              "type": "quantitative",
+              "bin": true,
+              "field": "IMDB_Rating"
+            },
+            "y": {
+              "type": "quantitative",
+              "bin": true,
+              "field": "Rotten_Tomatoes_Rating"
+            }
+          }
+        },
+        {
+          "data": {
+            "url": "https://vega.github.io/vega-datasets/data/movies.json",
+            "format": {
+              "type": "json"
+            }
+          },
+          "mark": "point",
+          "encoding": {
+            "color": {
+              "value": "grey"
+            },
+            "size": {
+              "type": "quantitative",
+              "aggregate": "count",
+              "field": "*",
+              "legend": {
+                "title": "Records in Selection"
+              }
+            },
+            "x": {
+              "type": "quantitative",
+              "bin": true,
+              "field": "IMDB_Rating"
+            },
+            "y": {
+              "type": "quantitative",
+              "bin": true,
+              "field": "Rotten_Tomatoes_Rating"
+            }
+          },
+          "transform": [
+            {
+              "filter": {
+                "selection": "selector003"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "data": {
+        "url": "https://vega.github.io/vega-datasets/data/movies.json",
+        "format": {
+          "type": "json"
+        }
+      },
+      "mark": "bar",
+      "encoding": {
+        "color": {
+          "condition": {
+            "selection": "selector003",
+            "value": "steelblue"
+          },
+          "value": "grey"
+        },
+        "x": {
+          "type": "nominal",
+          "field": "Major_Genre"
+        },
+        "y": {
+          "type": "quantitative",
+          "aggregate": "count",
+          "field": "*"
+        }
+      },
+      "height": 200,
+      "selection": {
+        "selector003": {
+          "type": "single",
+          "encodings": [
+            "x"
+          ],
+          "on": "click",
+          "resolve": "global",
+          "empty": "all"
+        }
+      },
+      "width": 550
+    }
+  ],
+  "resolve": {
+    "legend": {
+      "color": "independent",
+      "size": "independent"
+    }
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v2.json"
+}
