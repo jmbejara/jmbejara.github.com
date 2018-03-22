@@ -20,7 +20,9 @@ hr.star-light {
     border: none;
     border-top: solid .25rem;
     margin-top: 2.5rem;
-    margin-bottom: 2.5rem
+    margin-bottom: 2.5rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 hr.star-dark:after,
@@ -349,7 +351,7 @@ a:hover {
 }
 
 .bg-primary {
-    background-color: #ffff!important;
+    background-color: #800000!important;
 }
 
 .bg-secondary {

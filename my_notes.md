@@ -8,6 +8,8 @@ Maroon
 
 Hover active red:
 #ba3232
+new hover active red
+#bf5757
 
 
 

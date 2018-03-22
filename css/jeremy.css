@@ -81,3 +81,8 @@
 h2 {
     padding-top: 20px;
 }
+
+button.bg-white:hover,
+button.bg-white:focus {
+  background-color: #ba3232 !important;
+}
