@@ -24,3 +24,17 @@ header.masthead {
 
   }
 }
+
+header.masthead-short {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  h1 {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+    @include body-font;
+  }
+}
+

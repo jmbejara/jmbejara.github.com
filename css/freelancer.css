@@ -142,6 +142,16 @@ header.masthead {
       line-height: 4rem; }
     header.masthead h2 {
       font-size: 1.75em; } }
+header.masthead-short {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
+  header.masthead-short h1 {
+    font-size: 3rem;
+    line-height: 3rem; }
+  header.masthead-short h2 {
+    font-size: 1.3rem;
+    font-family: 'Lato'; }
+
 .portfolio {
   margin-bottom: -15px; }
   .portfolio .portfolio-item {
