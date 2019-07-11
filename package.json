@@ -42,9 +42,9 @@
         "tar": "^4.4.8"
     },
     "devDependencies": {
-        "browser-sync": "^2.26.5",
-        "gulp": "^3.9.1",
-        "gulp-clean-css": "3.9.2",
+        "browser-sync": "^2.26.7",
+        "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.2.0",
         "gulp-filter": "5.1.0",
         "gulp-header": "2.0.1",
         "gulp-rename": "^1.2.2",
