@@ -35,7 +35,7 @@
         "jquery": "^3.4.0",
         "jquery.easing": "^1.4.1",
         "magnific-popup": "^1.1.0",
-        "mixin-deep": "^2.0.0",
+        "mixin-deep": "^2.0.1",
         "popper": "^1.0.1",
         "popper.js": "^1.14.7",
         "sshpk": "^1.16.1",
