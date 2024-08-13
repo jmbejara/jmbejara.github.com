@@ -40,7 +40,7 @@
         "popper": "^1.0.1",
         "popper.js": "^1.14.7",
         "sshpk": "^1.16.1",
-        "tar": "^4.4.8",
+        "tar": "^6.2.1",
         "utf-8-validate": "^5.0.2"
     },
     "devDependencies": {
