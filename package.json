@@ -44,7 +44,7 @@
         "utf-8-validate": "^5.0.2"
     },
     "devDependencies": {
-        "browser-sync": "^2.26.14",
+        "browser-sync": "^3.0.3",
         "gulp": "^4.0.2",
         "gulp-clean-css": "^4.2.0",
         "gulp-filter": "5.1.0",
