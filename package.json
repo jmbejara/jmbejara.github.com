@@ -41,6 +41,7 @@
         "popper.js": "^1.14.7",
         "sshpk": "^1.16.1",
         "tar": "^6.2.1",
+        "tough-cookie": "^5.0.0",
         "utf-8-validate": "^5.0.2"
     },
     "devDependencies": {
