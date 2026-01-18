@@ -76,6 +76,18 @@
     width: 90%;
     max-width: 700px;
     padding: 10px;
+    text-align: left;
+}
+
+#profileblurb ul {
+    list-style: disc;
+    padding-left: 2rem;
+    text-align: left;
+}
+
+#profileblurb ul ul {
+    list-style: circle;
+    padding-left: 1.5rem;
 }
 
 h2 {
