@@ -18,12 +18,12 @@
     <!-- https://stackoverflow.com/questions/49547/how-do-we-control-web-page-caching-across-all-browsers -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Jeremiah Bejarano">
     <!-- }}}} -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Jeremy Bejarano</title>
+    <title>Jeremiah Bejarano</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -56,7 +56,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top text-uppercase" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">Jeremy Bejarano</a>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Jeremiah Bejarano</a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase bg-white text-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fa fa-bars"></i>
@@ -85,12 +85,9 @@
                 </div>
                 <div class="col-lg">
                     <div class="center text-left" id="profileblurb">
-                        My name is Jeremy Bejarano. I am a research economist at the Office of Financial Research (OFR) within the U.S. Department of the Treasury. I received my Ph.D. in Economics from the University of Chicago. My interests are in macroeconomics and finance, with a emphasis on asset pricing. 
+                        I'm Jeremiah Bejarano, an Associate Clinical Professor in the Financial Mathematics Program at the University of Chicago. I teach FINM 32800: Data Pipelines for Quantitative Research and, with Mark Hendricks, developed and teach FINM 33200: Generative and Agentic AI for Finance. Before that I was a research economist at the U.S. Department of the Treasury's Office of Financial Research. My research is on short-term funding markets, financial stability, and asset pricing. I received my Ph.D. in Economics from the University of Chicago.
 
                         <br><br>
-
-                        <b>Disclaimer:</b> The contents of this website and any opinions expressed herein are my own and do not necessarily reflect those of the Office of Financial Research or the U.S. Department of the Treasury.
-                        <br>
                         <div class="text mt-1 mb-1">
                             <ul>
                                 <li> 
@@ -98,9 +95,7 @@
                                 </li>
                                 <li> <b> Links: </b>
                                     <ul>
-                                    <li> <a href="https://www.financialresearch.gov/research-staff/details/jeremy-bejarano/">OFR Staff Website</a>
-                                    </li>
-                                    <li> <a href="https://finmath.uchicago.edu/about/faculty-and-lecturers/jeremy-bejarano/">UChicago Teaching</a>
+                                    <li> <a href="https://finmath.uchicago.edu/about/faculty-and-lecturers/jeremy-bejarano/">UChicago FinMath Faculty Page</a>
                                     </li>
                                     <li> <a href="https://github.com/jmbejara">GitHub Profile</a>
                                     </li>
@@ -142,12 +137,12 @@
 
                     <div class="mb-4">
                         <h6>
-                            <a href="downloads/draft_ftsfr.pdf">An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial Markets</a> (2026)
+                            <a href="https://www.financialresearch.gov/working-papers/2026/08/25/time-series-forecasting-methods-financial-markets/">An Open Benchmark for Evaluating Time Series Forecasting Methods across Financial Markets</a> (2026)
                         </h6>
                         <em>with Viren Desai, Kausthub Keshava, Arsh Kumar, Zixiao Wang, Vincent Hanyang Xu, and Yangge Xu</em> <br>
-                        <em>Working Paper</em>
+                        <em>OFR Working Paper 26-05</em>
                         <p class="ms-3">
-                            Financial regulators and researchers have emphasized forward-looking risk monitoring to address systemic vulnerabilities. This paper benchmarks state-of-the-art global time series forecasting methods, which have proven superior in the time series literature, on a wide-ranging suite of financial datasets. Benchmarks drive progress, and our systematic evaluation of over a dozen forecasting methods ranging from classical models to modern deep learning architectures reveals which approaches best capture early warning signals across different market segments. We evaluate these methods on critical financial stability metrics including arbitrage basis spreads that signal funding market stress, banking indicators that reveal institutional vulnerabilities, and asset returns across multiple markets. To enable reproducible research and continuous improvement in financial forecasting, we develop an open-source financial time series forecasting repository that standardizes these datasets according to canonical academic methodologies. Our results provide financial stability authorities with evidence-based guidance on which forecasting approaches most reliably detect emerging risks in specific market segments, directly enhancing the toolkit for macroprudential surveillance and systemic risk monitoring. Consistent with decades of empirical finance, returns remain extremely difficult to forecast, yet machine-learning-based global models yield meaningful accuracy gains for basis spreads, liquidity metrics, and other supervisory indicators where classical baselines fall short.
+                            Accurate time series forecasts underpin asset pricing, risk management, monetary and macroprudential policy, and other applications. The set of available forecasting methods is expanding rapidly, driven by new machine learning models. This raises a practical question: Do these methods deliver real forecasting power gains on financial data? Since no single method is best across all data generating processes, the question can be answered only by direct evaluation on domain-specific data, and a fair comparison requires holding the data fixed across methods. Yet, new methods are rarely evaluated on the financial data commonly used in academic finance; when they are, each is assessed on its own dataset and cleaning conventions. Apparent method rankings entangle method skill with cleaning choices that themselves require domain expertise. We address this by assembling, in one place, canonical cleaning procedures for many financial datasets to hold the data fixed across forecasting experiments. We introduce a standardized open-source dataset covering equities, corporate bonds, U.S. Treasuries, foreign exchange, commodities, credit default swaps, options, five basis spread datasets, and bank and intermediary indicators, each cleaned per the canonical paper for that asset class. Holding the data fixed and evaluating roughly a dozen univariate methods without exogenous regressors, we find that asset returns remain near unforecastable across every method family and that hybrid and machine learning methods exhibit additional forecasting power on basis spreads and bank indicators.
                         </p>
                     </div>
 
@@ -196,14 +191,23 @@
                 <div class="row m-4">
                     <div class="ms-auto">
                         <h3> Course Material </h3>
-                        Here I include material that I developed for courses that I have taught in the past.
+                        Here I include material that I developed for courses that I teach or have taught.
 
                         <div class="mb-4 mt-4">
-                            <h6><a href="https://finm-32900.github.io/">FINM 32900: Full-Stack Quantitative Finance</a></h6>
-                            <em>University of Chicago, Financial Mathematics Program (Winter 2024, 2025, 2026)</em><br>
-                            <a href="downloads/syllabus_FINM_32900_full_stack_quant.pdf">[Syllabus]</a> <a href="https://finm-32900.github.io/">[Online Textbook]</a> <a href="downloads/Course_Evaluations_FINM_32900_Full-Stack_Quantitative Finance_Jeremiah_Bejarano.pdf">[Course Evaluations]</a>
+                            <h6><a href="https://finm-32800.github.io/">FINM 32800: Data Pipelines for Quantitative Research</a></h6>
+                            <em>University of Chicago, Financial Mathematics Program (Autumn 2026; taught Winter 2024, 2025, 2026 as FINM 32900: Full-Stack Quantitative Finance)</em><br>
+                            <a href="https://finm-32800.github.io/_static/syllabus_finm_32800_data_pipelines_for_quantitative_research.pdf">[Syllabus]</a> <a href="https://finm-32800.github.io/">[Online Textbook]</a> <a href="downloads/Course_Evaluations_FINM_32900_Full-Stack_Quantitative Finance_Jeremiah_Bejarano.pdf">[Course Evaluations]</a>
                             <p class="ms-3 mt-2">
-                                "Full Stack Quantitative Finance" is a hands-on course centered on a core set of fundamental tools common across financial computing and data science. This course examines elements of the analytical pipeline, from data extraction and cleaning to exploratory analysis, visualization, and modeling, and finally, publication and deployment. It does so with the aim of teaching the tools and principles behind creating reproducible and scalable workflows, including build automation, dependency management, unit testing, the command-line environment, shell scripting, Git for version control, and GitHub for team collaboration. These skills are taught through case studies, each of which will additionally give students practical experience with key financial data sets and sources such as CRSP and Compustat for pricing and financials, macroeconomic data from FRED and the BEA, bond transactions from FINRA TRACE, Treasury auction data from TreasuryDirect, textual data from EDGAR, and high-frequency trade and quote data from NYSE.
+                                "Data Pipelines for Quantitative Research" is a hands-on course centered on building reproducible analytical pipelines: automated and fully reproducible workflows that carry a quantitative analysis from raw data to published result. This course examines every stage of the pipeline, from data extraction and cleaning, through data validation, exploratory analysis, visualization, modeling, and finally to publication and deployment. In industry, this work is sometimes called productionizing research, pairing developers with researchers to translate ideas into practice. These skills are taught through a series of case studies, each of which introduces students to a new set of tools and a new key financial data set: pricing and fundamentals from CRSP and Compustat, options data from OptionMetrics, corporate bond transactions from FINRA TRACE, intraday trades and quotes from NYSE TAQ, and order book data from CME Globex.
+                            </p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6><a href="https://finm-33200.github.io/">FINM 33200: Generative and Agentic AI for Finance</a></h6>
+                            <em>University of Chicago, Financial Mathematics Program, with Mark Hendricks (Spring 2026)</em><br>
+                            <a href="https://finm-33200.github.io/">[Online Textbook]</a>
+                            <p class="ms-3 mt-2">
+                                This course covers how large language models are changing quantitative finance, from turning unstructured text into trading signals to agents that carry out research and backtesting. Topics include context and harness engineering for those agents, fine-tuning open models with LoRA adapters and reinforcement learning, and keeping LLM-based backtests free of look-ahead bias.
                             </p>
                         </div>
 
@@ -282,7 +286,7 @@
     </footer>
     <div class="copyright py-4 text-center text-white">
         <div class="container footertext">
-            <small>Copyright &copy; Jeremy Bejarano 2021</small>
+            <small>Copyright &copy; Jeremiah Bejarano 2026</small>
         </div>
     </div>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
